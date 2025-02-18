@@ -1,114 +1,126 @@
-/* General Styling */
-* {
+/* Global Reset and Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body, h1, h2, p {
   margin: 0;
+  padding: 0;
 }
 body {
-  height: 100%;
-  font-size: 1.5em;
-  font-family: "HelveticaNeue", Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   line-height: 1.6;
-  color: #222;
-}
-html {
-  font-size: 12px;
+  color: #333;
 }
 
-/* Styling first div */
-
+/* Header (First Section) */
 .bg-image {
-  background-image: url(images/billgates.jpeg);
+  position: relative;
+  background: url('images/Bill_Gates_2.jpeg') center/cover no-repeat;
   height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#first-div {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+  color: #fff;
 }
-
-.text-styling {
-  display: inline-block;
-  font-size: 6rem;
-  border: 1px solid #fff;
+.bg-image .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.header-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.header-content h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4rem;
   text-transform: uppercase;
-  width: 5%;
-  word-wrap: break-word;
-  padding: 20px;
-  color: whitesmoke;
-  opacity: 0.8;
-  margin: auto 10%;
-  text-align: center;
+  letter-spacing: 0.1em;
 }
 
-/* Styling second div */
-
-#second-div {
-  background-color: #fff;
-  min-height: 80vh;
+/* Quote Section (Second Section) */
+.quote-section {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  align-items: center;
+  padding: 2rem;
+  background: #fff;
 }
-
-#second-div-text {
-  order: 1;
-  flex-grow: 1;
-  min-width: 30%;
-  margin-top: 25vh;
-  font-size: 2.3em;
-  font-family: "roboto", sans-serif;
+.quote-text {
+  flex: 1 1 40%;
+  padding: 1rem;
+  font-size: 1.5rem;
   text-align: center;
-  font-weight: 600;
-  margin-bottom: 25vh;
 }
-
-#bill-quote {
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#second-div-image {
-  order: 2;
-  flex-grow: 1;
-  min-width: 45%;
-  align-self: center;
-  max-width: 500px;
-  margin-right: 6%;
-}
-
-/* for the image to be displayed efficiently */
-#bill-image {
-  max-width: 50%;
-  box-sizing: border-box;
-  float: right;
-}
-
-/* Styling third div */
-
-#third-div {
-  background-color: #000;
-  min-height: 100vh;
-}
-
-.container {
-  width: 55%;
+.quote-image {
+  flex: 1 1 60%;
   text-align: center;
-  margin: 0 auto;
-  padding: 6% 1%;
-  color: #fff;
-  font-size: 1.8rem;
+  padding: 1rem;
+}
+.quote-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.quote-image img:hover {
+  transform: scale(1.05);
 }
 
-/* Author Text */
-
-#author-text {
-  color: #fff;
-  font-size: 1.2em;
+/* Biography Section (Third Section) */
+.biography {
+  background: #f7f7f7;
+  padding: 3rem 2rem;
   text-align: center;
-  margin-top: 0.6vh;
+}
+.biography h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.biography p {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-align: left;
+}
+.biography hr {
+  border: none;
+  height: 1px;
+  background: #ddd;
+  margin: 2rem auto;
+  width: 80%;
+}
+.biography footer p {
+  font-size: 1rem;
+  color: #666;
+}
+.biography footer a {
+  color: #007BFF;
+  text-decoration: none;
+}
+.biography footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .header-content h1 {
+    font-size: 2.5rem;
+  }
+  .quote-section {
+    flex-direction: column;
+  }
+  .quote-text, .quote-image {
+    flex: 1 1 100%;
+  }
+  .biography p {
+    font-size: 1rem;
+  }
 }
