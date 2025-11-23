@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
@@ -12,7 +13,7 @@ const JobDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/v1/job/${id}`, {
+      .get(`${import.meta.env.VITE_API_URL}/job/${id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -28,45 +29,50 @@ const JobDetails = () => {
   }
 
   return (
-    <section className="jobDetail page">
+    <section className="job-details-page page">
       <div className="container">
-        <h3>Job Details</h3>
-        <div className="banner">
-          <p>
-            Title: <span> {job.title}</span>
-          </p>
-          <p>
-            Category: <span>{job.category}</span>
-          </p>
-          <p>
-            Country: <span>{job.country}</span>
-          </p>
-          <p>
-            City: <span>{job.city}</span>
-          </p>
-          <p>
-            Location: <span>{job.location}</span>
-          </p>
-          <p>
-            Description: <span>{job.description}</span>
-          </p>
-          <p>
-            Job Posted On: <span>{job.jobPostedOn}</span>
-          </p>
-          <p>
-            Salary:{" "}
-            {job.fixedSalary ? (
-              <span>{job.fixedSalary}</span>
-            ) : (
-              <span>
-                {job.salaryFrom} - {job.salaryTo}
-              </span>
-            )}
-          </p>
+        <div className="card">
+          <div className="job-header">
+            <h2>{job.title}</h2>
+            <div className="job-meta">
+              <span>{job.category}</span>
+              <span>•</span>
+              <span>{job.country}, {job.city}</span>
+              <span>•</span>
+              <span>Posted on: {job.jobPostedOn}</span>
+            </div>
+          </div>
+
+          <div className="job-info-grid">
+            <div className="info-item">
+              <span>Location</span>
+              <strong>{job.location}</strong>
+            </div>
+            <div className="info-item">
+              <span>Salary</span>
+              <strong>
+                {job.fixedSalary ? (
+                  <span>{job.fixedSalary}</span>
+                ) : (
+                  <span>
+                    {job.salaryFrom} - {job.salaryTo}
+                  </span>
+                )}
+              </strong>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '2rem' }}>
+            <h4 style={{ marginBottom: '1rem' }}>Job Description</h4>
+            <p style={{ color: 'var(--text-main)', whiteSpace: 'pre-wrap' }}>{job.description}</p>
+          </div>
+
           {user && user.role === "Employer" ? (
             <></>
           ) : (
-            <Link to={`/application/${job._id}`}>Apply Now</Link>
+            <div style={{ textAlign: 'center' }}>
+              <Link to={`/application/${job._id}`} className="btn btn-primary">Apply Now</Link>
+            </div>
           )}
         </div>
       </div>

@@ -1,8 +1,5 @@
 import React, { useContext, useState } from "react";
-import { MdOutlineMailOutline } from "react-icons/md";
-import { RiLock2Fill } from "react-icons/ri";
 import { Link, Navigate } from "react-router-dom";
-import { FaRegUser } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
@@ -18,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/user/login",
+        `${import.meta.env.VITE_API_URL}/user/login`,
         { email, password, role },
         {
           headers: {
@@ -37,65 +34,56 @@ const Login = () => {
     }
   };
 
-  if(isAuthorized){
-    return <Navigate to={'/'}/>
+  if (isAuthorized) {
+    return <Navigate to={'/'} />
   }
 
   return (
-    <>
-      <section className="authPage">
-        <div className="container">
-          <div className="header">
-            <img src="/Hire-Minds-Full-bg.png" alt="logo" />
-            <h3>Login to your account</h3>
+    <section className="auth-page">
+      <div className="auth-card">
+        <div className="auth-header">
+          <img src="/Hire-Minds-Full-bg.png" alt="logo" style={{ width: '150px', marginBottom: '1rem' }} />
+          <h3>Welcome Back</h3>
+          <p>Login to access your account</p>
+        </div>
+        <form>
+          <div className="form-group">
+            <label className="form-label">Login As</label>
+            <select className="form-control" value={role} onChange={(e) => setRole(e.target.value)}>
+              <option value="">Select Role</option>
+              <option value="Employer">Employer</option>
+              <option value="Job Seeker">Job Seeker</option>
+            </select>
           </div>
-          <form>
-            <div className="inputTag">
-              <label>Login As</label>
-              <div>
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Select Role</option>
-                  <option value="Employer">Employer</option>
-                  <option value="Job Seeker">Job Seeker</option>
-                </select>
-                <FaRegUser />
-              </div>
-            </div>
-            <div className="inputTag">
-              <label>Email Address</label>
-              <div>
-                <input
-                  type="email"
-                  placeholder="email@gmail.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <MdOutlineMailOutline />
-              </div>
-            </div>
-            <div className="inputTag">
-              <label>Password</label>
-              <div>
-                <input
-                  type="password"
-                  placeholder="Your Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <RiLock2Fill />
-              </div>
-            </div>
-            <button type="submit" onClick={handleLogin}>
-              Login
-            </button>
-            <Link to={"/register"}>Register Now</Link>
-          </form>
-        </div>
-        <div className="banner">
-          <img src="/login.jpg" alt="login" />
-        </div>
-      </section>
-    </>
+          <div className="form-group">
+            <label className="form-label">Email Address</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="email@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Your Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginBottom: '1rem' }} onClick={handleLogin}>
+            Login
+          </button>
+          <div style={{ textAlign: 'center' }}>
+            <Link to={"/register"} style={{ color: 'var(--primary-color)', fontWeight: '500' }}>Don't have an account? Register Now</Link>
+          </div>
+        </form>
+      </div>
+    </section>
   );
 };
 

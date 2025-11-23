@@ -7,7 +7,7 @@ const PopularCompanies = () => {
     {
       id: 1,
       title: "Microsoft",
-      location: "Bengalore",
+      location: "Bangalore",
       openPositions: 10,
       icon: <FaMicrosoft />,
     },
@@ -27,21 +27,24 @@ const PopularCompanies = () => {
     },
   ];
   return (
-    <div className="companies">
+    <div className="companies" style={{ backgroundColor: 'var(--bg-body)' }}>
       <div className="container">
-        <h3>TOP COMPANIES</h3>
-        <div className="banner">
+        <div className="section-title">
+          <h2>Top Companies</h2>
+          <p>Work with the best organizations in the world</p>
+        </div>
+        <div className="grid-container">
           {companies.map((element) => {
             return (
-              <div className="card" key={element.id}>
-                <div className="content">
-                  <div className="icon">{element.icon}</div>
-                  <div className="text">
-                    <p>{element.title}</p>
-                    <p>{element.location}</p>
+              <div className="company-card" key={element.id}>
+                <div className="content" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', width: '100%' }}>
+                  <div className="icon-box" style={{ marginBottom: 0 }}>{element.icon}</div>
+                  <div className="text" style={{ textAlign: 'left' }}>
+                    <p style={{ fontWeight: 'bold', color: 'var(--text-main)', margin: 0 }}>{element.title}</p>
+                    <p style={{ fontSize: '0.875rem', margin: 0 }}>{element.location}</p>
                   </div>
                 </div>
-                <button>Open Positions {element.openPositions}</button>
+                <button className="btn btn-outline" style={{ width: '100%' }}>Open Positions {element.openPositions}</button>
               </div>
             );
           })}

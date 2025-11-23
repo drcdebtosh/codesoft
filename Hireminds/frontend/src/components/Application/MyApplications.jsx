@@ -18,7 +18,7 @@ const MyApplications = () => {
     try {
       if (user && user.role === "Employer") {
         axios
-          .get("http://localhost:4000/api/v1/application/employer/getall", {
+          .get(`${import.meta.env.VITE_API_URL}/application/employer/getall`, {
             withCredentials: true,
           })
           .then((res) => {
@@ -26,7 +26,7 @@ const MyApplications = () => {
           });
       } else {
         axios
-          .get("http://localhost:4000/api/v1/application/jobseeker/getall", {
+          .get(`${import.meta.env.VITE_API_URL}/application/jobseeker/getall`, {
             withCredentials: true,
           })
           .then((res) => {
@@ -45,7 +45,7 @@ const MyApplications = () => {
   const deleteApplication = (id) => {
     try {
       axios
-        .delete(`http://localhost:4000/api/v1/application/delete/${id}`, {
+        .delete(`${import.meta.env.VITE_API_URL}/application/delete/${id}`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -70,47 +70,33 @@ const MyApplications = () => {
 
   return (
     <section className="my_applications page">
-      {user && user.role === "Job Seeker" ? (
-        <div className="container">
-          <h1>My Applications</h1>
-          {applications.length <= 0 ? (
-            <>
-              {" "}
-              <h4>No Applications Found</h4>{" "}
-            </>
-          ) : (
-            applications.map((element) => {
-              return (
+      <div className="container">
+        <div className="section-title">
+          <h2>{user && user.role === "Job Seeker" ? "My Applications" : "Applications From Job Seekers"}</h2>
+        </div>
+        {applications.length <= 0 ? (
+          <h4 style={{ textAlign: 'center' }}>No Applications Found</h4>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {applications.map((element) => {
+              return user && user.role === "Job Seeker" ? (
                 <JobSeekerCard
                   element={element}
                   key={element._id}
                   deleteApplication={deleteApplication}
                   openModal={openModal}
                 />
-              );
-            })
-          )}
-        </div>
-      ) : (
-        <div className="container">
-          <h1>Applications From Job Seekers</h1>
-          {applications.length <= 0 ? (
-            <>
-              <h4>No Applications Found</h4>
-            </>
-          ) : (
-            applications.map((element) => {
-              return (
+              ) : (
                 <EmployerCard
                   element={element}
                   key={element._id}
                   openModal={openModal}
                 />
               );
-            })
-          )}
-        </div>
-      )}
+            })}
+          </div>
+        )}
+      </div>
       {modalOpen && (
         <ResumeModal imageUrl={resumeImageUrl} onClose={closeModal} />
       )}
@@ -122,71 +108,49 @@ export default MyApplications;
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   return (
-    <>
-      <div className="job_seeker_card">
-        <div className="detail">
-          <p>
-            <span>Name:</span> {element.name}
-          </p>
-          <p>
-            <span>Email:</span> {element.email}
-          </p>
-          <p>
-            <span>Phone:</span> {element.phone}
-          </p>
-          <p>
-            <span>Address:</span> {element.address}
-          </p>
-          <p>
-            <span>CoverLetter:</span> {element.coverLetter}
-          </p>
-        </div>
-        <div className="resume">
-          <img
-            src={element.resume.url}
-            alt="resume"
-            onClick={() => openModal(element.resume.url)}
-          />
-        </div>
-        <div className="btn_area">
-          <button onClick={() => deleteApplication(element._id)}>
-            Delete Application
-          </button>
-        </div>
+    <div className="card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '2rem', padding: '2rem' }}>
+      <div className="detail" style={{ flex: 2 }}>
+        <p><span>Name:</span> {element.name}</p>
+        <p><span>Email:</span> {element.email}</p>
+        <p><span>Phone:</span> {element.phone}</p>
+        <p><span>Address:</span> {element.address}</p>
+        <p><span>CoverLetter:</span> {element.coverLetter}</p>
       </div>
-    </>
+      <div className="resume" style={{ flex: 1, textAlign: 'center' }}>
+        <img
+          src={element.resume.url}
+          alt="resume"
+          onClick={() => openModal(element.resume.url)}
+          style={{ width: '150px', height: 'auto', cursor: 'pointer', borderRadius: '8px', border: '1px solid #ddd' }}
+        />
+      </div>
+      <div className="btn_area" style={{ flex: 1, textAlign: 'right' }}>
+        <button onClick={() => deleteApplication(element._id)} className="btn btn-primary" style={{ backgroundColor: 'var(--danger-color)' }}>
+          Delete Application
+        </button>
+      </div>
+    </div>
   );
 };
 
 const EmployerCard = ({ element, openModal }) => {
   return (
-    <>
-      <div className="job_seeker_card">
-        <div className="detail">
-          <p>
-            <span>Name:</span> {element.name}
-          </p>
-          <p>
-            <span>Email:</span> {element.email}
-          </p>
-          <p>
-            <span>Phone:</span> {element.phone}
-          </p>
-          <p>
-            <span>Address:</span> {element.address}
-          </p>
-          <p>
-            <span>CoverLetter:</span> {element.coverLetter}
-          </p>
-        </div>
-        <div className="resume">
-          <img
-            src={element.resume.url}
-            alt="resume"
-            onClick={() => openModal(element.resume.url)}
-          />
-        </div>
+    <div className="card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '2rem', padding: '2rem' }}>
+      <div className="detail" style={{ flex: 2 }}>
+        <p><span>Name:</span> {element.name}</p>
+        <p><span>Email:</span> {element.email}</p>
+        <p><span>Phone:</span> {element.phone}</p>
+        <p><span>Address:</span> {element.address}</p>
+        <p><span>CoverLetter:</span> {element.coverLetter}</p>
       </div>
-    </>
+      <div className="resume" style={{ flex: 1, textAlign: 'center' }}>
+        <img
+          src={element.resume.url}
+          alt="resume"
+          onClick={() => openModal(element.resume.url)}
+          style={{ width: '150px', height: 'auto', cursor: 'pointer', borderRadius: '8px', border: '1px solid #ddd' }}
+        />
+      </div>
+    </div>
   );
 };

@@ -63,19 +63,24 @@ const PopularCategories = () => {
   ];
   return (
     <div className="categories">
-      <h3>POPULAR CATEGORIES</h3>
-      <div className="banner">
-        {categories.map((element) => {
-          return (
-            <div className="card" key={element.id}>
-              <div className="icon">{element.icon}</div>
-              <div className="text">
-                <p>{element.title}</p>
-                <p>{element.subTitle}</p>
+      <div className="container">
+        <div className="section-title">
+          <h2>Popular Categories</h2>
+          <p>Explore jobs in the most trending industries</p>
+        </div>
+        <div className="grid-container">
+          {categories.map((element) => {
+            return (
+              <div className="category-card" key={element.id}>
+                <div className="icon-box">{element.icon}</div>
+                <div className="text" style={{ textAlign: 'center' }}>
+                  <p style={{ fontWeight: '600', color: 'var(--text-main)', marginBottom: '0.5rem' }}>{element.title}</p>
+                  <p style={{ fontSize: '0.875rem' }}>{element.subTitle}</p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

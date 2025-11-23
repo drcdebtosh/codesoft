@@ -1,22 +1,20 @@
 import React from "react";
 import { useContext } from "react";
 import { Context } from "../../main";
-import { Navigate } from "react-router-dom";
-import HeroSection from "./HeroSection";
-import HowItWorks from "./HowItWorks";
+import DashboardHero from "./DashboardHero";
 import PopularCategories from "./PopularCategories";
 import PopularCompanies from "./PopularCompanies";
+import LandingPage from "../Landing/LandingPage";
 
 const Home = () => {
   const { isAuthorized } = useContext(Context);
   if (!isAuthorized) {
-    return <Navigate to={"/login"} />;
+    return <LandingPage />;
   }
   return (
     <>
       <section className="homePage page">
-        <HeroSection />
-        <HowItWorks />
+        <DashboardHero />
         <PopularCategories />
         <PopularCompanies />
       </section>

@@ -10,7 +10,7 @@ const Jobs = () => {
   useEffect(() => {
     try {
       axios
-        .get("http://localhost:4000/api/v1/job/getall", {
+        .get(`${import.meta.env.VITE_API_URL}/job/getall`, {
           withCredentials: true,
         })
         .then((res) => {
@@ -27,16 +27,19 @@ const Jobs = () => {
   return (
     <section className="jobs page">
       <div className="container">
-        <h1>ALL AVAILABLE JOBS</h1>
-        <div className="banner">
+        <div className="section-title">
+          <h2>All Available Jobs</h2>
+          <p>Find the perfect role for you</p>
+        </div>
+        <div className="grid-container">
           {jobs.jobs &&
             jobs.jobs.map((element) => {
               return (
-                <div className="card" key={element._id}>
-                  <p>{element.title}</p>
-                  <p>{element.category}</p>
-                  <p>{element.country}</p>
-                  <Link to={`/job/${element._id}`}>Job Details</Link>
+                <div className="job-card" key={element._id} style={{ alignItems: 'flex-start', textAlign: 'left' }}>
+                  <h4 style={{ marginBottom: '0.5rem', color: 'var(--primary-color)' }}>{element.title}</h4>
+                  <p style={{ marginBottom: '0.25rem' }}><strong>Category:</strong> {element.category}</p>
+                  <p style={{ marginBottom: '1rem' }}><strong>Location:</strong> {element.country}</p>
+                  <Link to={`/job/${element._id}`} className="btn btn-outline" style={{ width: '100%', textAlign: 'center' }}>View Details</Link>
                 </div>
               );
             })}
