@@ -59,6 +59,24 @@ const MyApplications = () => {
     }
   };
 
+  const updateApplicationStatus = async (id, status) => {
+    try {
+      const res = await axios.put(
+        `${import.meta.env.VITE_API_URL}/application/status/update/${id}`,
+        { status },
+        { withCredentials: true }
+      );
+      toast.success(res.data.message);
+      setApplications((prevApplications) =>
+        prevApplications.map((app) =>
+          app._id === id ? { ...app, status } : app
+        )
+      );
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   const openModal = (imageUrl) => {
     setResumeImageUrl(imageUrl);
     setModalOpen(true);
@@ -91,6 +109,7 @@ const MyApplications = () => {
                   element={element}
                   key={element._id}
                   openModal={openModal}
+                  updateApplicationStatus={updateApplicationStatus}
                 />
               );
             })}
@@ -115,6 +134,16 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         <p><span>Phone:</span> {element.phone}</p>
         <p><span>Address:</span> {element.address}</p>
         <p><span>CoverLetter:</span> {element.coverLetter}</p>
+        <p>
+          <span>Status:</span>
+          <span style={{
+            fontWeight: 'bold',
+            color: element.status === "Accepted" ? "green" : element.status === "Rejected" ? "red" : "blue",
+            marginLeft: '0.5rem'
+          }}>
+            {element.status}
+          </span>
+        </p>
       </div>
       <div className="resume" style={{ flex: 1, textAlign: 'center' }}>
         <img
@@ -133,7 +162,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   );
 };
 
-const EmployerCard = ({ element, openModal }) => {
+const EmployerCard = ({ element, openModal, updateApplicationStatus }) => {
   return (
     <div className="card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '2rem', padding: '2rem' }}>
       <div className="detail" style={{ flex: 2 }}>
@@ -150,6 +179,20 @@ const EmployerCard = ({ element, openModal }) => {
           onClick={() => openModal(element.resume.url)}
           style={{ width: '150px', height: 'auto', cursor: 'pointer', borderRadius: '8px', border: '1px solid #ddd' }}
         />
+      </div>
+      <div className="status_area" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <label style={{ fontWeight: 'bold' }}>Status:</label>
+        <select
+          value={element.status}
+          onChange={(e) => updateApplicationStatus(element._id, e.target.value)}
+          className="form-control"
+        >
+          <option value="Pending">Pending</option>
+          <option value="Reviewed">Reviewed</option>
+          <option value="Shortlisted">Shortlisted</option>
+          <option value="Accepted">Accepted</option>
+          <option value="Rejected">Rejected</option>
+        </select>
       </div>
     </div>
   );

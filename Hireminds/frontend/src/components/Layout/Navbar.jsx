@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
       <div className="container">
         <div className="logo">
-          <img src="/Hire-Minds-white-bg.png" alt="logo" style={{ height: '40px' }} />
+          Hire<span>Minds</span>
         </div>
         <ul className={!show ? "nav-links" : "show-menu nav-links"}>
           <li>
@@ -68,11 +68,17 @@ const Navbar = () => {
               ) : (
                 <></>
               )}
-              <button className="btn btn-primary" onClick={handleLogout}>LOGOUT</button>
+              <li>
+                <Link to={"/profile"} onClick={() => setShow(false)}>
+                  PROFILE
+                </Link>
+              </li>
+              <button className="btn btn-outline" onClick={handleLogout}>LOGOUT</button>
             </>
           ) : (
             <>
-              <button className="btn btn-primary" onClick={() => navigateTo('/login')}>Register</button>
+              <button className="btn btn-outline" onClick={() => navigateTo('/login')}>LOGIN</button>
+              <button className="btn btn-primary" onClick={() => navigateTo('/register')}>REGISTER</button>
             </>
           )}
         </ul>

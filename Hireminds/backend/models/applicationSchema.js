@@ -27,11 +27,11 @@ const applicationSchema = new mongoose.Schema({
   },
   resume: {
     public_id: {
-      type: String, 
+      type: String,
       required: true,
     },
     url: {
-      type: String, 
+      type: String,
       required: true,
     },
   },
@@ -58,6 +58,11 @@ const applicationSchema = new mongoose.Schema({
       enum: ["Employer"],
       required: true,
     },
+  },
+  status: {
+    type: String,
+    enum: ["Pending", "Reviewed", "Shortlisted", "Rejected", "Accepted"],
+    default: "Pending",
   },
 });
 

@@ -11,14 +11,18 @@ const LandingHero = () => {
                         <span style={{
                             color: 'var(--primary-color)',
                             fontWeight: '600',
-                            letterSpacing: '1px',
+                            letterSpacing: '2px',
                             textTransform: 'uppercase',
-                            marginBottom: '1rem',
-                            display: 'block'
+                            marginBottom: '1.5rem',
+                            display: 'inline-block',
+                            background: 'rgba(176, 72, 255, 0.1)',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '50px',
+                            fontSize: '0.875rem'
                         }}>
                             Launch Your Career
                         </span>
-                        <h1>Unlock Your Potential <br /> with <span style={{ color: 'var(--primary-color)' }}>Hireminds</span></h1>
+                        <h1>Unlock Your Potential <br /> with <span>Hireminds</span></h1>
                         <p>
                             The ultimate platform connecting ambitious talent with world-class organizations.
                             Join thousands of professionals who have found their dream careers here.
@@ -27,18 +31,24 @@ const LandingHero = () => {
                             <Link to="/register" className="btn btn-primary">Get Started</Link>
                             <Link to="/login" className="btn btn-outline">Sign In</Link>
                         </div>
-                        <div style={{ marginTop: '3rem', display: 'flex', gap: '2rem' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <FaRocket style={{ color: 'var(--primary-color)' }} />
-                                <span>Fast Matching</span>
+                        <div style={{ marginTop: '4rem', display: 'flex', gap: '3rem', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '2rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <div style={{ background: 'rgba(176, 72, 255, 0.1)', padding: '10px', borderRadius: '50%' }}>
+                                    <FaRocket style={{ color: 'var(--primary-color)' }} />
+                                </div>
+                                <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>Fast Matching</span>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <FaBriefcase style={{ color: 'var(--primary-color)' }} />
-                                <span>Top Companies</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <div style={{ background: 'rgba(176, 72, 255, 0.1)', padding: '10px', borderRadius: '50%' }}>
+                                    <FaBriefcase style={{ color: 'var(--primary-color)' }} />
+                                </div>
+                                <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>Top Companies</span>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <FaUserTie style={{ color: 'var(--primary-color)' }} />
-                                <span>Expert Guidance</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <div style={{ background: 'rgba(176, 72, 255, 0.1)', padding: '10px', borderRadius: '50%' }}>
+                                    <FaUserTie style={{ color: 'var(--primary-color)' }} />
+                                </div>
+                                <span style={{ fontWeight: 500, color: 'var(--text-main)' }}>Expert Guidance</span>
                             </div>
                         </div>
                     </div>

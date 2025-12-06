@@ -30,7 +30,8 @@ const Login = () => {
       setRole("");
       setIsAuthorized(true);
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error("Login error:", error);
+      toast.error(error.response?.data?.message || "An error occurred. Please try again.");
     }
   };
 
@@ -42,7 +43,9 @@ const Login = () => {
     <section className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <img src="/Hire-Minds-Full-bg.png" alt="logo" style={{ width: '150px', marginBottom: '1rem' }} />
+          <div className="logo" style={{ justifyContent: 'center', marginBottom: '1.5rem' }}>
+            Hire<span>Minds</span>
+          </div>
           <h3>Welcome Back</h3>
           <p>Login to access your account</p>
         </div>
@@ -78,6 +81,9 @@ const Login = () => {
           <button type="submit" className="btn btn-primary" style={{ width: '100%', marginBottom: '1rem' }} onClick={handleLogin}>
             Login
           </button>
+          <div style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
+            <Link to={"/password/forgot"} style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Forgot Password?</Link>
+          </div>
           <div style={{ textAlign: 'center' }}>
             <Link to={"/register"} style={{ color: 'var(--primary-color)', fontWeight: '500' }}>Don't have an account? Register Now</Link>
           </div>

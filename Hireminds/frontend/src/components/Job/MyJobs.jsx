@@ -87,119 +87,127 @@ const MyJobs = () => {
     <>
       <div className="myJobs page">
         <div className="container">
-          <h1>Your Posted Jobs</h1>
+          <h1 className="section-title" style={{ marginBottom: '3rem' }}>Your Posted Jobs</h1>
           {myJobs.length > 0 ? (
             <>
               <div className="banner">
-                {myJobs.map((element) => (
-                  <div className="card" key={element._id}>
-                    <div className="content">
-                      <div className="short_fields">
-                        <div>
-                          <span>Title:</span>
-                          <input
-                            type="text"
-                            disabled={
-                              editingMode !== element._id ? true : false
-                            }
-                            value={element.title}
-                            onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "title",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                        <div>
-                          {" "}
-                          <span>Country:</span>
-                          <input
-                            type="text"
-                            disabled={
-                              editingMode !== element._id ? true : false
-                            }
-                            value={element.country}
-                            onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "country",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                        <div>
-                          <span>City:</span>
-                          <input
-                            type="text"
-                            disabled={
-                              editingMode !== element._id ? true : false
-                            }
-                            value={element.city}
-                            onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "city",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
-                        <div>
-                          <span>Category:</span>
-                          <select
-                            value={element.category}
-                            onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "category",
-                                e.target.value
-                              )
-                            }
-                            disabled={
-                              editingMode !== element._id ? true : false
-                            }
-                          >
-                            <option value="Graphics & Design">
-                              Graphics & Design
-                            </option>
-                            <option value="Mobile App Development">
-                              Mobile App Development
-                            </option>
-                            <option value="Frontend Web Development">
-                              Frontend Web Development
-                            </option>
-                            <option value="MERN Stack Development">
-                              MERN STACK Development
-                            </option>
-                            <option value="Account & Finance">
-                              Account & Finance
-                            </option>
-                            <option value="Artificial Intelligence">
-                              Artificial Intelligence
-                            </option>
-                            <option value="Video Animation">
-                              Video Animation
-                            </option>
-                            <option value="MEAN Stack Development">
-                              MEAN STACK Development
-                            </option>
-                            <option value="MEVN Stack Development">
-                              MEVN STACK Development
-                            </option>
-                            <option value="Data Entry Operator">
-                              Data Entry Operator
-                            </option>
-                          </select>
-                        </div>
-                        <div>
-                          <span>
-                            Salary:{" "}
+                <div className="grid-container" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))' }}>
+                  {myJobs.map((element) => (
+                    <div className="card" key={element._id} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                      <div className="content" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <div className="short_fields" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                          <div>
+                            <span style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Title:</span>
+                            <input
+                              type="text"
+                              className="form-control"
+                              disabled={
+                                editingMode !== element._id ? true : false
+                              }
+                              value={element.title}
+                              onChange={(e) =>
+                                handleInputChange(
+                                  element._id,
+                                  "title",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                            <div>
+                              <span style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Country:</span>
+                              <input
+                                type="text"
+                                className="form-control"
+                                disabled={
+                                  editingMode !== element._id ? true : false
+                                }
+                                value={element.country}
+                                onChange={(e) =>
+                                  handleInputChange(
+                                    element._id,
+                                    "country",
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </div>
+                            <div>
+                              <span style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>City:</span>
+                              <input
+                                type="text"
+                                className="form-control"
+                                disabled={
+                                  editingMode !== element._id ? true : false
+                                }
+                                value={element.city}
+                                onChange={(e) =>
+                                  handleInputChange(
+                                    element._id,
+                                    "city",
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <span style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Category:</span>
+                            <select
+                              value={element.category}
+                              className="form-control"
+                              onChange={(e) =>
+                                handleInputChange(
+                                  element._id,
+                                  "category",
+                                  e.target.value
+                                )
+                              }
+                              disabled={
+                                editingMode !== element._id ? true : false
+                              }
+                            >
+                              <option value="Graphics & Design">
+                                Graphics & Design
+                              </option>
+                              <option value="Mobile App Development">
+                                Mobile App Development
+                              </option>
+                              <option value="Frontend Web Development">
+                                Frontend Web Development
+                              </option>
+                              <option value="MERN Stack Development">
+                                MERN STACK Development
+                              </option>
+                              <option value="Account & Finance">
+                                Account & Finance
+                              </option>
+                              <option value="Artificial Intelligence">
+                                Artificial Intelligence
+                              </option>
+                              <option value="Video Animation">
+                                Video Animation
+                              </option>
+                              <option value="MEAN Stack Development">
+                                MEAN STACK Development
+                              </option>
+                              <option value="MEVN Stack Development">
+                                MEVN STACK Development
+                              </option>
+                              <option value="Data Entry Operator">
+                                Data Entry Operator
+                              </option>
+                            </select>
+                          </div>
+                          <div>
+                            <span style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>
+                              Salary:{" "}
+                            </span>
                             {element.fixedSalary ? (
                               <input
                                 type="number"
+                                className="form-control"
                                 disabled={
                                   editingMode !== element._id ? true : false
                                 }
@@ -213,9 +221,10 @@ const MyJobs = () => {
                                 }
                               />
                             ) : (
-                              <div>
+                              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                                 <input
                                   type="number"
+                                  className="form-control"
                                   disabled={
                                     editingMode !== element._id ? true : false
                                   }
@@ -230,6 +239,7 @@ const MyJobs = () => {
                                 />
                                 <input
                                   type="number"
+                                  className="form-control"
                                   disabled={
                                     editingMode !== element._id ? true : false
                                   }
@@ -244,102 +254,108 @@ const MyJobs = () => {
                                 />
                               </div>
                             )}
-                          </span>
+                          </div>
+                          <div>
+                            <span style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Expired:</span>
+                            <select
+                              value={element.expired}
+                              className="form-control"
+                              onChange={(e) =>
+                                handleInputChange(
+                                  element._id,
+                                  "expired",
+                                  e.target.value
+                                )
+                              }
+                              disabled={
+                                editingMode !== element._id ? true : false
+                              }
+                            >
+                              <option value={true}>TRUE</option>
+                              <option value={false}>FALSE</option>
+                            </select>
+                          </div>
                         </div>
-                        <div>
-                          {" "}
-                          <span>Expired:</span>
-                          <select
-                            value={element.expired}
-                            onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "expired",
-                                e.target.value
-                              )
-                            }
-                            disabled={
-                              editingMode !== element._id ? true : false
-                            }
-                          >
-                            <option value={true}>TRUE</option>
-                            <option value={false}>FALSE</option>
-                          </select>
+                        <div className="long_field" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                          <div>
+                            <span style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Description:</span>{" "}
+                            <textarea
+                              rows={5}
+                              value={element.description}
+                              className="form-control"
+                              disabled={
+                                editingMode !== element._id ? true : false
+                              }
+                              onChange={(e) =>
+                                handleInputChange(
+                                  element._id,
+                                  "description",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
+                          <div>
+                            <span style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Location: </span>
+                            <textarea
+                              value={element.location}
+                              rows={5}
+                              className="form-control"
+                              disabled={
+                                editingMode !== element._id ? true : false
+                              }
+                              onChange={(e) =>
+                                handleInputChange(
+                                  element._id,
+                                  "location",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </div>
                         </div>
                       </div>
-                      <div className="long_field">
-                        <div>
-                          <span>Description:</span>{" "}
-                          <textarea
-                            rows={5}
-                            value={element.description}
-                            disabled={
-                              editingMode !== element._id ? true : false
-                            }
-                            onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "description",
-                                e.target.value
-                              )
-                            }
-                          />
+                      {/* Out Of Content Class */}
+                      <div className="button_wrapper" style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                        <div className="edit_btn_wrapper" style={{ flex: 1 }}>
+                          {editingMode === element._id ? (
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                              <button
+                                onClick={() => handleUpdateJob(element._id)}
+                                className="btn btn-primary"
+                                style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                              >
+                                <FaCheck />
+                              </button>
+                              <button
+                                onClick={() => handleDisableEdit()}
+                                className="btn btn-outline"
+                                style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', borderColor: 'var(--danger-color)', color: 'var(--danger-color)' }}
+                              >
+                                <RxCross2 />
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => handleEnableEdit(element._id)}
+                              className="btn btn-outline"
+                              style={{ width: '100%' }}
+                            >
+                              Edit
+                            </button>
+                          )}
                         </div>
-                        <div>
-                          <span>Location: </span>
-                          <textarea
-                            value={element.location}
-                            rows={5}
-                            disabled={
-                              editingMode !== element._id ? true : false
-                            }
-                            onChange={(e) =>
-                              handleInputChange(
-                                element._id,
-                                "location",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </div>
+                        <button
+                          onClick={() => handleDeleteJob(element._id)}
+                          className="btn btn-primary"
+                          style={{ flex: 1, backgroundColor: 'var(--danger-color)' }}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
-                    {/* Out Of Content Class */}
-                    <div className="button_wrapper">
-                      <div className="edit_btn_wrapper">
-                        {editingMode === element._id ? (
-                          <>
-                            <button
-                              onClick={() => handleUpdateJob(element._id)}
-                              className="check_btn"
-                            >
-                              <FaCheck />
-                            </button>
-                            <button
-                              onClick={() => handleDisableEdit()}
-                              className="cross_btn"
-                            >
-                              <RxCross2 />
-                            </button>
-                          </>
-                        ) : (
-                          <button
-                            onClick={() => handleEnableEdit(element._id)}
-                            className="edit_btn"
-                          >
-                            Edit
-                          </button>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => handleDeleteJob(element._id)}
-                        className="delete_btn"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </>
           ) : (

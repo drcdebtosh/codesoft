@@ -46,7 +46,9 @@ const Register = () => {
     <section className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <img src="/Hire-Minds-Full-bg.png" alt="logo" style={{ width: '150px', marginBottom: '1rem' }} />
+          <div className="logo" style={{ justifyContent: 'center', marginBottom: '1.5rem' }}>
+            Hire<span>Minds</span>
+          </div>
           <h3>Create Account</h3>
           <p>Join us to find your dream job</p>
         </div>

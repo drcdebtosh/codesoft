@@ -3,10 +3,30 @@ import { Job } from "../models/jobSchema.js";
 import ErrorHandler from "../middlewares/error.js";
 
 export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
-  const jobs = await Job.find({ expired: false });
+  const { keyword, category, country, city, location } = req.query;
+  const query = { expired: false };
+
+  if (keyword) {
+    query.title = { $regex: keyword, $options: "i" };
+  }
+  if (category) {
+    query.category = category;
+  }
+  if (country) {
+    query.country = country;
+  }
+  if (city) {
+    query.city = city;
+  }
+  if (location) {
+    query.location = location;
+  }
+
+  const jobs = await Job.find(query);
   res.status(200).json({
     success: true,
     jobs,
+    count: jobs.length,
   });
 });
 

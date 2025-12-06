@@ -27,7 +27,7 @@ const PopularCompanies = () => {
     },
   ];
   return (
-    <div className="companies" style={{ backgroundColor: 'var(--bg-body)' }}>
+    <div className="companies" style={{ backgroundColor: 'transparent', padding: '4rem 0' }}>
       <div className="container">
         <div className="section-title">
           <h2>Top Companies</h2>
@@ -37,12 +37,10 @@ const PopularCompanies = () => {
           {companies.map((element) => {
             return (
               <div className="company-card" key={element.id}>
-                <div className="content" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', width: '100%' }}>
-                  <div className="icon-box" style={{ marginBottom: 0 }}>{element.icon}</div>
-                  <div className="text" style={{ textAlign: 'left' }}>
-                    <p style={{ fontWeight: 'bold', color: 'var(--text-main)', margin: 0 }}>{element.title}</p>
-                    <p style={{ fontSize: '0.875rem', margin: 0 }}>{element.location}</p>
-                  </div>
+                <div className="icon-box">{element.icon}</div>
+                <div className="text" style={{ marginBottom: '1.5rem' }}>
+                  <p style={{ fontWeight: 'bold', color: 'var(--text-main)', fontSize: '1.25rem', marginBottom: '0.25rem' }}>{element.title}</p>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>{element.location}</p>
                 </div>
                 <button className="btn btn-outline" style={{ width: '100%' }}>Open Positions {element.openPositions}</button>
               </div>

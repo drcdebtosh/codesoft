@@ -76,18 +76,20 @@ const PostJob = () => {
     <>
       <div className="job_post page">
         <div className="container">
-          <h3>POST NEW JOB</h3>
-          <form onSubmit={handleJobPost}>
-            <div className="wrapper">
+          <h3 className="section-title" style={{ marginBottom: '2rem', textAlign: 'center' }}>POST NEW JOB</h3>
+          <form onSubmit={handleJobPost} style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div className="wrapper" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Job Title"
+                className="form-control"
               />
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
+                className="form-control"
               >
                 <option value="">Select Category</option>
                 <option value="Graphics & Design">Graphics & Design</option>
@@ -114,18 +116,20 @@ const PostJob = () => {
                 <option value="Data Entry Operator">Data Entry Operator</option>
               </select>
             </div>
-            <div className="wrapper">
+            <div className="wrapper" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
               <input
                 type="text"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 placeholder="Country"
+                className="form-control"
               />
               <input
                 type="text"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="City"
+                className="form-control"
               />
             </div>
             <input
@@ -133,11 +137,15 @@ const PostJob = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Location"
+              className="form-control"
+              style={{ marginBottom: '1.5rem' }}
             />
-            <div className="salary_wrapper">
+            <div className="salary_wrapper" style={{ marginBottom: '1.5rem' }}>
               <select
                 value={salaryType}
                 onChange={(e) => setSalaryType(e.target.value)}
+                className="form-control"
+                style={{ marginBottom: '1rem' }}
               >
                 <option value="default">Select Salary Type</option>
                 <option value="Fixed Salary">Fixed Salary</option>
@@ -145,27 +153,30 @@ const PostJob = () => {
               </select>
               <div>
                 {salaryType === "default" ? (
-                  <p>Please provide Salary Type *</p>
+                  <p style={{ color: 'var(--danger-color)' }}>Please provide Salary Type *</p>
                 ) : salaryType === "Fixed Salary" ? (
                   <input
                     type="number"
                     placeholder="Enter Fixed Salary"
                     value={fixedSalary}
                     onChange={(e) => setFixedSalary(e.target.value)}
+                    className="form-control"
                   />
                 ) : (
-                  <div className="ranged_salary">
+                  <div className="ranged_salary" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                     <input
                       type="number"
                       placeholder="Salary From"
                       value={salaryFrom}
                       onChange={(e) => setSalaryFrom(e.target.value)}
+                      className="form-control"
                     />
                     <input
                       type="number"
                       placeholder="Salary To"
                       value={salaryTo}
                       onChange={(e) => setSalaryTo(e.target.value)}
+                      className="form-control"
                     />
                   </div>
                 )}
@@ -176,8 +187,10 @@ const PostJob = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Job Description"
+              className="form-control"
+              style={{ marginBottom: '2rem' }}
             />
-            <button type="submit">Create Job</button>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Create Job</button>
           </form>
         </div>
       </div>

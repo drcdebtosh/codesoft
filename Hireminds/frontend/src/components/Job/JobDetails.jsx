@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import Spinner from "../Shared/Spinner";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import { Context } from "../../main";
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigateTo = useNavigate();
 
   const { isAuthorized, user } = useContext(Context);
@@ -18,20 +20,24 @@ const JobDetails = () => {
       })
       .then((res) => {
         setJob(res.data.job);
+        setLoading(false);
       })
       .catch((error) => {
+        setLoading(false);
         navigateTo("/notfound");
       });
   }, []);
 
-  if (!isAuthorized) {
-    navigateTo("/login");
+
+
+  if (loading) {
+    return <Spinner />;
   }
 
   return (
     <section className="job-details-page page">
       <div className="container">
-        <div className="card">
+        <div className="card job-details-card">
           <div className="job-header">
             <h2>{job.title}</h2>
             <div className="job-meta">
@@ -62,16 +68,20 @@ const JobDetails = () => {
             </div>
           </div>
 
-          <div style={{ marginBottom: '2rem' }}>
-            <h4 style={{ marginBottom: '1rem' }}>Job Description</h4>
-            <p style={{ color: 'var(--text-main)', whiteSpace: 'pre-wrap' }}>{job.description}</p>
+          <div className="job-description">
+            <h4>Job Description</h4>
+            <p>{job.description}</p>
           </div>
 
           {user && user.role === "Employer" ? (
             <></>
           ) : (
-            <div style={{ textAlign: 'center' }}>
-              <Link to={`/application/${job._id}`} className="btn btn-primary">Apply Now</Link>
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+              {isAuthorized ? (
+                <Link to={`/application/${job._id}`} className="btn btn-primary">Apply Now</Link>
+              ) : (
+                <Link to="/login" className="btn btn-primary">Login to Apply</Link>
+              )}
             </div>
           )}
         </div>
